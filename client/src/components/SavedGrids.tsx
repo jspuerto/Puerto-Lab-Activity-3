@@ -130,16 +130,21 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
   };
 
   return (
-    <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg h-full flex flex-col">
+    <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg h-full flex flex-col  w-[550px]">
       <CardHeader className="pb-1 flex-shrink-0">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center text-sm">
             <FolderOpenIcon className="w-4 h-4 text-purple-600 mr-2" />
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">💾 Saved</span>
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              💾 Saved
+            </span>
           </div>
           <Dialog open={saveDialogOpen} onOpenChange={setSaveDialogOpen}>
             <DialogTrigger asChild>
-              <Button size="sm" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-xs py-1 h-6">
+              <Button
+                size="sm"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-xs py-1 h-6"
+              >
                 <SaveIcon className="w-3 h-3 mr-1" />
                 Save
               </Button>
@@ -152,7 +157,9 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
               </DialogHeader>
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="gridName" className="text-purple-700">Grid Name</Label>
+                  <Label htmlFor="gridName" className="text-purple-700">
+                    Grid Name
+                  </Label>
                   <Input
                     id="gridName"
                     value={gridName}
@@ -162,19 +169,21 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
                   />
                 </div>
                 <div className="flex justify-end space-x-2">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     onClick={() => setSaveDialogOpen(false)}
                     className="border-purple-400 text-purple-600 hover:bg-purple-50"
                   >
                     Cancel
                   </Button>
-                  <Button 
+                  <Button
                     onClick={handleSaveGrid}
                     disabled={saveGridMutation.isPending}
                     className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
                   >
-                    {saveGridMutation.isPending ? 'Saving... ✨' : 'Save Grid 💜'}
+                    {saveGridMutation.isPending
+                      ? "Saving... ✨"
+                      : "Save Grid 💜"}
                   </Button>
                 </div>
               </div>
@@ -184,7 +193,9 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
       </CardHeader>
       <CardContent className="pt-0 flex-1 min-h-0">
         {isLoading ? (
-          <div className="text-center py-2 text-purple-500 text-xs">Loading... ✨</div>
+          <div className="text-center py-2 text-purple-500 text-xs">
+            Loading... ✨
+          </div>
         ) : !savedGrids || savedGrids.length === 0 ? (
           <div className="text-center py-2 text-purple-500">
             <FolderOpenIcon className="w-6 h-6 mx-auto mb-1 text-purple-300" />
@@ -193,9 +204,14 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
         ) : (
           <div className="space-y-1 h-full">
             {savedGrids.slice(0, 4).map((grid) => (
-              <div key={grid.id} className="flex items-center justify-between p-1 bg-white/50 rounded border border-purple-200">
+              <div
+                key={grid.id}
+                className="flex items-center justify-between p-1 bg-white/50 rounded border border-purple-200"
+              >
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-medium text-purple-800 text-xs truncate">{grid.name}</h4>
+                  <h4 className="font-medium text-purple-800 text-xs truncate">
+                    {grid.name}
+                  </h4>
                 </div>
                 <div className="flex space-x-1 ml-1">
                   <Button
