@@ -128,34 +128,30 @@ export default function PathfindingPage() {
   return (
     <>
       {/* Header */}
-      <header className="bg-gradient-to-r from-purple-100 via-pink-50 to-purple-100 shadow-lg border-b-2 border-purple-200 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-md">
-                <RouteIcon className="w-5 h-5 text-white" />
+      <header className="bg-gradient-to-r from-purple-100 via-pink-50 to-purple-100 shadow-lg border-b-2 border-purple-200">
+        <div className="max-w-full mx-auto px-4">
+          <div className="flex items-center justify-between h-12">
+            <div className="flex items-center space-x-2">
+              <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-md">
+                <RouteIcon className="w-4 h-4 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <h1 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                   ✨ Pathfinding Visualizer ✨
                 </h1>
-                <p className="text-sm text-purple-500">💜 Dijkstra's Algorithm Demonstration</p>
               </div>
             </div>
-            <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-sm px-3 py-1 rounded-full border border-purple-200">
-              <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-              <span className="text-sm text-purple-600 font-mono">Web Engineering Lab</span>
+            <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-sm px-2 py-1 rounded-full border border-purple-200">
+              <span className="text-xs text-purple-600 font-mono">Web Engineering Lab</span>
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-1 space-y-6">
+      <div className="h-[calc(100vh-3rem)] max-w-full mx-auto px-4 py-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 h-full">
+          <div className="lg:col-span-1 space-y-3 overflow-y-auto">
             <ControlPanel
               mode={mode}
               onModeChange={setMode}
@@ -174,7 +170,7 @@ export default function PathfindingPage() {
             />
           </div>
           
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 flex items-center justify-center">
             <Grid
               nodes={nodes}
               onCellClick={handleCellClick}

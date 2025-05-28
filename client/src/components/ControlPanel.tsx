@@ -37,41 +37,41 @@ export function ControlPanel({
     <div className="space-y-6">
       {/* Mode Selection */}
       <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg">
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <SparklesIcon className="w-5 h-5 text-purple-600 mr-2" />
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center text-sm">
+            <SparklesIcon className="w-4 h-4 text-purple-600 mr-2" />
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">✨ Controls</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-3 pt-0">
           <div>
-            <Label className="text-sm font-medium text-purple-700 mb-2 block">💜 Current Mode</Label>
-            <RadioGroup value={mode} onValueChange={(value) => onModeChange(value as PlacementMode)}>
+            <Label className="text-xs font-medium text-purple-700 mb-1 block">💜 Mode</Label>
+            <RadioGroup value={mode} onValueChange={(value) => onModeChange(value as PlacementMode)} className="space-y-1">
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="start" id="start" className="border-purple-400 text-purple-600" />
-                <Label htmlFor="start" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800">
-                  <div className="w-4 h-4 cell-start rounded mr-2"></div>
-                  Place Start Point 🌟
+                <RadioGroupItem value="start" id="start" className="border-purple-400 text-purple-600 w-3 h-3" />
+                <Label htmlFor="start" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800 text-xs">
+                  <div className="w-3 h-3 cell-start rounded mr-2"></div>
+                  Start 🌟
                 </Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="end" id="end" className="border-purple-400 text-purple-600" />
-                <Label htmlFor="end" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800">
-                  <div className="w-4 h-4 cell-end rounded mr-2"></div>
-                  Place End Point 💕
+                <RadioGroupItem value="end" id="end" className="border-purple-400 text-purple-600 w-3 h-3" />
+                <Label htmlFor="end" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800 text-xs">
+                  <div className="w-3 h-3 cell-end rounded mr-2"></div>
+                  End 💕
                 </Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="obstacle" id="obstacle" className="border-purple-400 text-purple-600" />
-                <Label htmlFor="obstacle" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800">
-                  <div className="w-4 h-4 cell-obstacle rounded mr-2"></div>
-                  Place Obstacles 🏰
+                <RadioGroupItem value="obstacle" id="obstacle" className="border-purple-400 text-purple-600 w-3 h-3" />
+                <Label htmlFor="obstacle" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800 text-xs">
+                  <div className="w-3 h-3 cell-obstacle rounded mr-2"></div>
+                  Obstacles 🏰
                 </Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="erase" id="erase" className="border-purple-400 text-purple-600" />
-                <Label htmlFor="erase" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800">
-                  <Eraser className="w-4 h-4 text-purple-500 mr-2" />
+                <RadioGroupItem value="erase" id="erase" className="border-purple-400 text-purple-600 w-3 h-3" />
+                <Label htmlFor="erase" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800 text-xs">
+                  <Eraser className="w-3 h-3 text-purple-500 mr-2" />
                   Erase ✨
                 </Label>
               </div>
@@ -79,8 +79,8 @@ export function ControlPanel({
           </div>
 
           <div>
-            <Label className="text-sm font-medium text-purple-700 mb-2 block">⚡ Animation Speed</Label>
-            <div className="flex items-center space-x-3">
+            <Label className="text-xs font-medium text-purple-700 mb-1 block">⚡ Speed</Label>
+            <div className="flex items-center space-x-2">
               <span className="text-xs text-purple-500">Slow</span>
               <Slider
                 value={[speed]}
@@ -93,7 +93,7 @@ export function ControlPanel({
               <span className="text-xs text-purple-500">Fast</span>
             </div>
             <div className="mt-1 text-center">
-              <span className="text-xs font-mono text-purple-600 bg-white/50 px-2 py-1 rounded-full">
+              <span className="text-xs font-mono text-purple-600 bg-white/50 px-2 py-0.5 rounded-full">
                 {speedNames[speed as keyof typeof speedNames]}
               </span>
             </div>
@@ -102,30 +102,30 @@ export function ControlPanel({
       </Card>
 
       {/* Action Buttons */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <PlayIcon className="w-5 h-5 text-green-600 mr-2" />
-            Actions
+      <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg">
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center text-sm">
+            <PlayIcon className="w-4 h-4 text-purple-600 mr-2" />
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">✨ Actions</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="space-y-2 pt-0">
           <Button 
             onClick={onFindPath} 
             disabled={isRunning}
-            className="w-full bg-blue-600 hover:bg-blue-700"
+            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-xs py-2"
           >
-            <RouteIcon className="w-4 h-4 mr-2" />
-            Find Path
+            <RouteIcon className="w-3 h-3 mr-2" />
+            Find Path ✨
           </Button>
           
           <Button 
             onClick={onClearPath} 
             disabled={isRunning}
             variant="outline"
-            className="w-full border-orange-600 text-orange-600 hover:bg-orange-50"
+            className="w-full border-purple-400 text-purple-600 hover:bg-purple-50 text-xs py-2"
           >
-            <Eraser className="w-4 h-4 mr-2" />
+            <Eraser className="w-3 h-3 mr-2" />
             Clear Path
           </Button>
           
@@ -133,74 +133,38 @@ export function ControlPanel({
             onClick={onResetGrid} 
             disabled={isRunning}
             variant="outline"
-            className="w-full border-gray-600 text-gray-600 hover:bg-gray-50"
+            className="w-full border-purple-400 text-purple-600 hover:bg-purple-50 text-xs py-2"
           >
-            <RefreshCwIcon className="w-4 h-4 mr-2" />
+            <RefreshCwIcon className="w-3 h-3 mr-2" />
             Reset Grid
           </Button>
         </CardContent>
       </Card>
 
       {/* Algorithm Info */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <InfoIcon className="w-5 h-5 text-purple-600 mr-2" />
-            Algorithm Status
+      <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg">
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center text-sm">
+            <InfoIcon className="w-4 h-4 text-purple-600 mr-2" />
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">💜 Status</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="space-y-2 pt-0">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Status:</span>
-            <span className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">{stats.status}</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Nodes Explored:</span>
-            <span className="text-sm font-mono bg-blue-50 px-2 py-1 rounded text-blue-800">{stats.exploredCount}</span>
+            <span className="text-xs text-purple-600">Status:</span>
+            <span className="text-xs font-mono bg-white/50 px-2 py-0.5 rounded text-purple-700">{stats.status}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Path Length:</span>
-            <span className="text-sm font-mono bg-orange-50 px-2 py-1 rounded text-orange-800">{stats.pathLength}</span>
+            <span className="text-xs text-purple-600">Explored:</span>
+            <span className="text-xs font-mono bg-purple-100 px-2 py-0.5 rounded text-purple-800">{stats.exploredCount}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Time Elapsed:</span>
-            <span className="text-sm font-mono bg-green-50 px-2 py-1 rounded text-green-800">{stats.timeElapsed}ms</span>
+            <span className="text-xs text-purple-600">Path:</span>
+            <span className="text-xs font-mono bg-pink-100 px-2 py-0.5 rounded text-purple-800">{stats.pathLength}</span>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Legend */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <PaletteIcon className="w-5 h-5 text-indigo-600 mr-2" />
-            Legend
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <div className="flex items-center">
-            <div className="w-4 h-4 cell-start rounded mr-3"></div>
-            <span className="text-sm text-gray-700">Start Point</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-4 h-4 cell-end rounded mr-3"></div>
-            <span className="text-sm text-gray-700">End Point</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-4 h-4 cell-obstacle rounded mr-3"></div>
-            <span className="text-sm text-gray-700">Obstacle</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-4 h-4 cell-explored rounded mr-3"></div>
-            <span className="text-sm text-gray-700">Explored Node</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-4 h-4 cell-current rounded mr-3"></div>
-            <span className="text-sm text-gray-700">Current Node</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-4 h-4 cell-path rounded mr-3"></div>
-            <span className="text-sm text-gray-700">Shortest Path</span>
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-purple-600">Time:</span>
+            <span className="text-xs font-mono bg-purple-100 px-2 py-0.5 rounded text-purple-800">{stats.timeElapsed}ms</span>
           </div>
         </CardContent>
       </Card>
