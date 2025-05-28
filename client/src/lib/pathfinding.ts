@@ -120,6 +120,37 @@ export class PathfindingGrid {
     this.endNode = null;
     this.initialize();
   }
+
+  loadFromData(gridData: any) {
+    this.reset();
+    
+    // Load nodes
+    if (gridData.nodes) {
+      for (let row = 0; row < this.rows && row < gridData.nodes.length; row++) {
+        for (let col = 0; col < this.cols && col < gridData.nodes[row].length; col++) {
+          const nodeData = gridData.nodes[row][col];
+          if (nodeData && nodeData.type) {
+            this.setNodeType(row, col, nodeData.type);
+          }
+        }
+      }
+    }
+    
+    // Set start and end nodes based on saved positions
+    if (gridData.startNode) {
+      const { row, col } = gridData.startNode;
+      if (row >= 0 && row < this.rows && col >= 0 && col < this.cols) {
+        this.setNodeType(row, col, 'start');
+      }
+    }
+    
+    if (gridData.endNode) {
+      const { row, col } = gridData.endNode;
+      if (row >= 0 && row < this.rows && col >= 0 && col < this.cols) {
+        this.setNodeType(row, col, 'end');
+      }
+    }
+  }
 }
 
 export interface PathfindingStats {

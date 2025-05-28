@@ -1,21 +1,29 @@
-import { users, type User, type InsertUser } from "@shared/schema";
-
-// modify the interface with any CRUD methods
-// you might need
+import { users, grids, type User, type InsertUser, type Grid, type InsertGrid } from "@shared/schema";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  
+  // Grid storage methods
+  getAllGrids(): Promise<Grid[]>;
+  getGrid(id: number): Promise<Grid | undefined>;
+  createGrid(grid: InsertGrid): Promise<Grid>;
+  updateGrid(id: number, grid: Partial<InsertGrid>): Promise<Grid | undefined>;
+  deleteGrid(id: number): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
-  currentId: number;
+  private grids: Map<number, Grid>;
+  private currentUserId: number;
+  private currentGridId: number;
 
   constructor() {
     this.users = new Map();
-    this.currentId = 1;
+    this.grids = new Map();
+    this.currentUserId = 1;
+    this.currentGridId = 1;
   }
 
   async getUser(id: number): Promise<User | undefined> {
@@ -29,10 +37,51 @@ export class MemStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentId++;
+    const id = this.currentUserId++;
     const user: User = { ...insertUser, id };
     this.users.set(id, user);
     return user;
+  }
+
+  async getAllGrids(): Promise<Grid[]> {
+    return Array.from(this.grids.values()).sort((a, b) => 
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  }
+
+  async getGrid(id: number): Promise<Grid | undefined> {
+    return this.grids.get(id);
+  }
+
+  async createGrid(insertGrid: InsertGrid): Promise<Grid> {
+    const id = this.currentGridId++;
+    const now = new Date();
+    const grid: Grid = { 
+      ...insertGrid, 
+      id, 
+      createdAt: now,
+      updatedAt: now
+    };
+    this.grids.set(id, grid);
+    return grid;
+  }
+
+  async updateGrid(id: number, updateData: Partial<InsertGrid>): Promise<Grid | undefined> {
+    const existingGrid = this.grids.get(id);
+    if (!existingGrid) return undefined;
+
+    const updatedGrid: Grid = {
+      ...existingGrid,
+      ...updateData,
+      updatedAt: new Date()
+    };
+    
+    this.grids.set(id, updatedGrid);
+    return updatedGrid;
+  }
+
+  async deleteGrid(id: number): Promise<boolean> {
+    return this.grids.delete(id);
   }
 }
 
