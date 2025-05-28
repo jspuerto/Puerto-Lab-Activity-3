@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { PlayIcon, Eraser, RefreshCwIcon, SettingsIcon, InfoIcon, PaletteIcon, RouteIcon } from 'lucide-react';
+import { PlayIcon, Eraser, RefreshCwIcon, SettingsIcon, InfoIcon, PaletteIcon, RouteIcon, SparklesIcon, HeartIcon } from 'lucide-react';
 import { PathfindingStats } from '@/lib/pathfinding';
 
 export type PlacementMode = 'start' | 'end' | 'obstacle' | 'erase';
@@ -36,52 +36,52 @@ export function ControlPanel({
   return (
     <div className="space-y-6">
       {/* Mode Selection */}
-      <Card>
+      <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg">
         <CardHeader>
           <CardTitle className="flex items-center">
-            <SettingsIcon className="w-5 h-5 text-blue-600 mr-2" />
-            Controls
+            <SparklesIcon className="w-5 h-5 text-purple-600 mr-2" />
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">✨ Controls</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label className="text-sm font-medium text-gray-700 mb-2 block">Current Mode</Label>
+            <Label className="text-sm font-medium text-purple-700 mb-2 block">💜 Current Mode</Label>
             <RadioGroup value={mode} onValueChange={(value) => onModeChange(value as PlacementMode)}>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="start" id="start" />
-                <Label htmlFor="start" className="flex items-center cursor-pointer">
+                <RadioGroupItem value="start" id="start" className="border-purple-400 text-purple-600" />
+                <Label htmlFor="start" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800">
                   <div className="w-4 h-4 cell-start rounded mr-2"></div>
-                  Place Start Point
+                  Place Start Point 🌟
                 </Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="end" id="end" />
-                <Label htmlFor="end" className="flex items-center cursor-pointer">
+                <RadioGroupItem value="end" id="end" className="border-purple-400 text-purple-600" />
+                <Label htmlFor="end" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800">
                   <div className="w-4 h-4 cell-end rounded mr-2"></div>
-                  Place End Point
+                  Place End Point 💕
                 </Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="obstacle" id="obstacle" />
-                <Label htmlFor="obstacle" className="flex items-center cursor-pointer">
+                <RadioGroupItem value="obstacle" id="obstacle" className="border-purple-400 text-purple-600" />
+                <Label htmlFor="obstacle" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800">
                   <div className="w-4 h-4 cell-obstacle rounded mr-2"></div>
-                  Place Obstacles
+                  Place Obstacles 🏰
                 </Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="erase" id="erase" />
-                <Label htmlFor="erase" className="flex items-center cursor-pointer">
-                  <Eraser className="w-4 h-4 text-gray-500 mr-2" />
-                  Erase
+                <RadioGroupItem value="erase" id="erase" className="border-purple-400 text-purple-600" />
+                <Label htmlFor="erase" className="flex items-center cursor-pointer text-purple-700 hover:text-purple-800">
+                  <Eraser className="w-4 h-4 text-purple-500 mr-2" />
+                  Erase ✨
                 </Label>
               </div>
             </RadioGroup>
           </div>
 
           <div>
-            <Label className="text-sm font-medium text-gray-700 mb-2 block">Animation Speed</Label>
+            <Label className="text-sm font-medium text-purple-700 mb-2 block">⚡ Animation Speed</Label>
             <div className="flex items-center space-x-3">
-              <span className="text-xs text-gray-500">Slow</span>
+              <span className="text-xs text-purple-500">Slow</span>
               <Slider
                 value={[speed]}
                 onValueChange={(values) => onSpeedChange(values[0])}
@@ -90,10 +90,10 @@ export function ControlPanel({
                 step={1}
                 className="flex-1"
               />
-              <span className="text-xs text-gray-500">Fast</span>
+              <span className="text-xs text-purple-500">Fast</span>
             </div>
             <div className="mt-1 text-center">
-              <span className="text-xs font-mono text-gray-600">
+              <span className="text-xs font-mono text-purple-600 bg-white/50 px-2 py-1 rounded-full">
                 {speedNames[speed as keyof typeof speedNames]}
               </span>
             </div>
