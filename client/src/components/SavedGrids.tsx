@@ -130,18 +130,18 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
   };
 
   return (
-    <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg">
-      <CardHeader className="pb-2">
+    <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg h-full flex flex-col">
+      <CardHeader className="pb-1 flex-shrink-0">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center text-sm">
             <FolderOpenIcon className="w-4 h-4 text-purple-600 mr-2" />
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">💾 Saved Grids</span>
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">💾 Saved</span>
           </div>
           <Dialog open={saveDialogOpen} onOpenChange={setSaveDialogOpen}>
             <DialogTrigger asChild>
-              <Button size="sm" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-xs py-1">
+              <Button size="sm" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-xs py-1 h-6">
                 <SaveIcon className="w-3 h-3 mr-1" />
-                Save ✨
+                Save
               </Button>
             </DialogTrigger>
             <DialogContent className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-300">
@@ -182,32 +182,27 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
           </Dialog>
         </CardTitle>
       </CardHeader>
-      <CardContent className="pt-0">
+      <CardContent className="pt-0 flex-1 min-h-0">
         {isLoading ? (
-          <div className="text-center py-2 text-purple-500 text-xs">Loading grids... ✨</div>
+          <div className="text-center py-2 text-purple-500 text-xs">Loading... ✨</div>
         ) : !savedGrids || savedGrids.length === 0 ? (
-          <div className="text-center py-3 text-purple-500">
-            <FolderOpenIcon className="w-8 h-8 mx-auto mb-2 text-purple-300" />
-            <p className="text-xs">No saved grids yet 💜</p>
-            <p className="text-xs">Save your current grid to see it here</p>
+          <div className="text-center py-2 text-purple-500">
+            <FolderOpenIcon className="w-6 h-6 mx-auto mb-1 text-purple-300" />
+            <p className="text-xs">No saved grids 💜</p>
           </div>
         ) : (
-          <div className="space-y-2 max-h-32 overflow-y-auto">
-            {savedGrids.map((grid) => (
-              <div key={grid.id} className="flex items-center justify-between p-2 bg-white/50 rounded-lg border border-purple-200">
+          <div className="space-y-1 h-full">
+            {savedGrids.slice(0, 4).map((grid) => (
+              <div key={grid.id} className="flex items-center justify-between p-1 bg-white/50 rounded border border-purple-200">
                 <div className="flex-1 min-w-0">
                   <h4 className="font-medium text-purple-800 text-xs truncate">{grid.name}</h4>
-                  <div className="flex items-center text-xs text-purple-500 mt-0.5">
-                    <CalendarIcon className="w-2 h-2 mr-1" />
-                    {formatDate(grid.createdAt)}
-                  </div>
                 </div>
-                <div className="flex space-x-1 ml-2">
+                <div className="flex space-x-1 ml-1">
                   <Button
                     size="sm"
                     variant="outline"
                     onClick={() => handleLoadGrid(grid)}
-                    className="text-purple-600 border-purple-400 hover:bg-purple-50 text-xs py-1 px-2"
+                    className="text-purple-600 border-purple-400 hover:bg-purple-50 text-xs py-0 px-1 h-5"
                   >
                     Load
                   </Button>
@@ -216,13 +211,18 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
                     variant="outline"
                     onClick={() => deleteGridMutation.mutate(grid.id)}
                     disabled={deleteGridMutation.isPending}
-                    className="text-pink-600 border-pink-400 hover:bg-pink-50 p-1"
+                    className="text-pink-600 border-pink-400 hover:bg-pink-50 p-0 h-5 w-5"
                   >
-                    <TrashIcon className="w-3 h-3" />
+                    <TrashIcon className="w-2 h-2" />
                   </Button>
                 </div>
               </div>
             ))}
+            {savedGrids && savedGrids.length > 4 && (
+              <div className="text-center text-xs text-purple-500">
+                +{savedGrids.length - 4} more grids
+              </div>
+            )}
           </div>
         )}
       </CardContent>

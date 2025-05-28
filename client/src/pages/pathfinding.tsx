@@ -149,28 +149,32 @@ export default function PathfindingPage() {
       </header>
 
       {/* Main Content */}
-      <div className="h-[calc(100vh-3rem)] max-w-full mx-auto px-4 py-4">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 h-full">
-          <div className="lg:col-span-1 space-y-3 overflow-y-auto">
-            <ControlPanel
-              mode={mode}
-              onModeChange={setMode}
-              speed={speed}
-              onSpeedChange={setSpeed}
-              onFindPath={handleFindPath}
-              onClearPath={handleClearPath}
-              onResetGrid={handleResetGrid}
-              stats={stats}
-              isRunning={isRunning}
-            />
+      <div className="h-[calc(100vh-3rem)] max-w-full mx-auto px-2 py-2">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-2 h-full">
+          <div className="lg:col-span-1 space-y-2 h-full flex flex-col">
+            <div className="flex-1">
+              <ControlPanel
+                mode={mode}
+                onModeChange={setMode}
+                speed={speed}
+                onSpeedChange={setSpeed}
+                onFindPath={handleFindPath}
+                onClearPath={handleClearPath}
+                onResetGrid={handleResetGrid}
+                stats={stats}
+                isRunning={isRunning}
+              />
+            </div>
             
-            <SavedGrids
-              currentGrid={grid}
-              onLoadGrid={handleLoadGrid}
-            />
+            <div className="flex-1">
+              <SavedGrids
+                currentGrid={grid}
+                onLoadGrid={handleLoadGrid}
+              />
+            </div>
           </div>
           
-          <div className="lg:col-span-3 flex items-center justify-center">
+          <div className="lg:col-span-3 flex items-center justify-center h-full">
             <Grid
               nodes={nodes}
               onCellClick={handleCellClick}
