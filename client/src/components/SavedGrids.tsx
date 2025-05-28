@@ -28,11 +28,13 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
 
   const saveGridMutation = useMutation({
     mutationFn: async (data: { name: string; gridData: any }) => {
-      return apiRequest('/api/grids', {
+      const response = await fetch('/api/grids', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' }
       });
+      if (!response.ok) throw new Error('Failed to save grid');
+      return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/grids'] });
@@ -54,7 +56,9 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
 
   const deleteGridMutation = useMutation({
     mutationFn: async (id: number) => {
-      return apiRequest(`/api/grids/${id}`, { method: 'DELETE' });
+      const response = await fetch(`/api/grids/${id}`, { method: 'DELETE' });
+      if (!response.ok) throw new Error('Failed to delete grid');
+      return response;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/grids'] });
@@ -114,8 +118,9 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  const formatDate = (dateString: string | Date) => {
+    const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
+    return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',

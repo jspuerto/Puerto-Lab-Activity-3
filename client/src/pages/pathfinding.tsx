@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { PathfindingGrid, DijkstraAlgorithm, PathfindingNode, PathfindingStats } from '@/lib/pathfinding';
 import { Grid } from '@/components/Grid';
 import { ControlPanel, PlacementMode } from '@/components/ControlPanel';
+import { SavedGrids } from '@/components/SavedGrids';
 import { RouteIcon } from 'lucide-react';
 
 export default function PathfindingPage() {
@@ -110,6 +111,20 @@ export default function PathfindingPage() {
     });
   }, [isRunning, grid, algorithm]);
 
+  const handleLoadGrid = useCallback((gridData: any) => {
+    if (isRunning) return;
+    
+    algorithm.stop();
+    grid.loadFromData(gridData);
+    setNodes([...grid.nodes]);
+    setStats({
+      exploredCount: 0,
+      pathLength: 0,
+      timeElapsed: 0,
+      status: 'Grid loaded'
+    });
+  }, [isRunning, grid, algorithm]);
+
   return (
     <>
       {/* Header */}
@@ -137,8 +152,8 @@ export default function PathfindingPage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-1 space-y-6">
             <ControlPanel
               mode={mode}
               onModeChange={setMode}
@@ -150,9 +165,14 @@ export default function PathfindingPage() {
               stats={stats}
               isRunning={isRunning}
             />
+            
+            <SavedGrids
+              currentGrid={grid}
+              onLoadGrid={handleLoadGrid}
+            />
           </div>
           
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <Grid
               nodes={nodes}
               onCellClick={handleCellClick}
