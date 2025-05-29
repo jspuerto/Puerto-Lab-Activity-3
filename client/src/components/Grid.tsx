@@ -40,7 +40,7 @@ export function Grid({ nodes, onCellClick, isRunning }: GridProps) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg border-2 border-purple-200 p-4 w-[800px] mx-auto ml-60">
+    <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl shadow-lg border-2 border-purple-200 p-4 w-[800px] mx-auto ">
       <div className="flex items-center justify-center mb-3">
         <h2 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent flex items-center">
           <svg
@@ -60,7 +60,7 @@ export function Grid({ nodes, onCellClick, isRunning }: GridProps) {
         </h2>
       </div>
       <div className="flex justify-center mb-3 ">
-        <div className="inline-block border-3 border-purple-300 rounded-2xl overflow-hidden shadow-xl bg-white/30 backdrop-blur-sm p-2 w-[600px]">
+        <div className="inline-block border-3 border-purple-300 rounded-2xl overflow-hidden shadow-xl bg-white/30 backdrop-blur-sm p-2 w-[400px]">
           <div className="grid grid-cols-10 gap-1">
             {nodes.map((row, rowIndex) =>
               row.map((node, colIndex) => (

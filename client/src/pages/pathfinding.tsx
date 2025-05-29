@@ -137,12 +137,14 @@ export default function PathfindingPage() {
               </div>
               <div>
                 <h1 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  ✨ Pathfinding Visualizer ✨
+                  Pathfinding Visualizer
                 </h1>
               </div>
             </div>
             <div className="flex items-center space-x-2 bg-white/30 backdrop-blur-sm px-2 py-1 rounded-full border border-purple-200">
-              <span className="text-xs text-purple-600 font-mono">Web Engineering Lab</span>
+              <span className="text-xs text-purple-600 font-mono">
+                Puerto - Web-Based Interactive Pathfinding Visualizer
+              </span>
             </div>
           </div>
         </div>
@@ -165,15 +167,12 @@ export default function PathfindingPage() {
                 isRunning={isRunning}
               />
             </div>
-            
+
             <div className="flex-1">
-              <SavedGrids
-                currentGrid={grid}
-                onLoadGrid={handleLoadGrid}
-              />
+              <SavedGrids currentGrid={grid} onLoadGrid={handleLoadGrid} />
             </div>
           </div>
-          
+
           <div className="lg:col-span-3 flex items-center justify-center h-full">
             <Grid
               nodes={nodes}

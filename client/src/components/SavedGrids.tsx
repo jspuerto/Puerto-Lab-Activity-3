@@ -1,15 +1,26 @@
-import { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { SaveIcon, FolderOpenIcon, TrashIcon, CalendarIcon } from 'lucide-react';
-import { PathfindingGrid, PathfindingNode } from '@/lib/pathfinding';
-import { apiRequest, queryClient } from '@/lib/queryClient';
-import { useToast } from '@/hooks/use-toast';
-import type { Grid } from '@shared/schema';
+import { useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  SaveIcon,
+  FolderOpenIcon,
+  TrashIcon,
+  CalendarIcon,
+} from "lucide-react";
+import { PathfindingGrid, PathfindingNode } from "@/lib/pathfinding";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import type { Grid } from "@shared/schema";
 
 interface SavedGridsProps {
   currentGrid: PathfindingGrid;
@@ -18,28 +29,29 @@ interface SavedGridsProps {
 
 export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
-  const [gridName, setGridName] = useState('');
+  const [gridName, setGridName] = useState("");
   const { toast } = useToast();
 
   const { data: savedGrids, isLoading } = useQuery({
-    queryKey: ['/api/grids'],
-    queryFn: () => fetch('/api/grids').then(res => res.json()) as Promise<Grid[]>
+    queryKey: ["/api/grids"],
+    queryFn: () =>
+      fetch("/api/grids").then((res) => res.json()) as Promise<Grid[]>,
   });
 
   const saveGridMutation = useMutation({
     mutationFn: async (data: { name: string; gridData: any }) => {
-      const response = await fetch('/api/grids', {
-        method: 'POST',
+      const response = await fetch("/api/grids", {
+        method: "POST",
         body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { "Content-Type": "application/json" },
       });
-      if (!response.ok) throw new Error('Failed to save grid');
+      if (!response.ok) throw new Error("Failed to save grid");
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/grids'] });
+      queryClient.invalidateQueries({ queryKey: ["/api/grids"] });
       setSaveDialogOpen(false);
-      setGridName('');
+      setGridName("");
       toast({
         title: "Grid Saved!",
         description: "Your pathfinding grid has been saved successfully.",
@@ -51,17 +63,17 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
         description: "Failed to save the grid. Please try again.",
         variant: "destructive",
       });
-    }
+    },
   });
 
   const deleteGridMutation = useMutation({
     mutationFn: async (id: number) => {
-      const response = await fetch(`/api/grids/${id}`, { method: 'DELETE' });
-      if (!response.ok) throw new Error('Failed to delete grid');
+      const response = await fetch(`/api/grids/${id}`, { method: "DELETE" });
+      if (!response.ok) throw new Error("Failed to delete grid");
       return response;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/grids'] });
+      queryClient.invalidateQueries({ queryKey: ["/api/grids"] });
       toast({
         title: "Grid Deleted",
         description: "The grid has been deleted successfully.",
@@ -69,11 +81,11 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
     },
     onError: () => {
       toast({
-        title: "Delete Failed", 
+        title: "Delete Failed",
         description: "Failed to delete the grid. Please try again.",
         variant: "destructive",
       });
-    }
+    },
   });
 
   const handleSaveGrid = () => {
@@ -88,15 +100,19 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
 
     // Serialize the current grid state
     const gridData = {
-      nodes: currentGrid.nodes.map(row => 
-        row.map(node => ({
+      nodes: currentGrid.nodes.map((row) =>
+        row.map((node) => ({
           row: node.row,
           col: node.col,
-          type: node.type
+          type: node.type,
         }))
       ),
-      startNode: currentGrid.startNode ? { row: currentGrid.startNode.row, col: currentGrid.startNode.col } : null,
-      endNode: currentGrid.endNode ? { row: currentGrid.endNode.row, col: currentGrid.endNode.col } : null
+      startNode: currentGrid.startNode
+        ? { row: currentGrid.startNode.row, col: currentGrid.startNode.col }
+        : null,
+      endNode: currentGrid.endNode
+        ? { row: currentGrid.endNode.row, col: currentGrid.endNode.col }
+        : null,
     };
 
     saveGridMutation.mutate({ name: gridName, gridData });
@@ -119,18 +135,19 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
   };
 
   const formatDate = (dateString: string | Date) => {
-    const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    const date =
+      typeof dateString === "string" ? new Date(dateString) : dateString;
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
   return (
-    <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg h-full flex flex-col  w-[550px]">
+    <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg h-full flex flex-col w-[1000px]+">
       <CardHeader className="pb-1 flex-shrink-0">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center text-sm">
@@ -152,7 +169,7 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
             <DialogContent className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-300">
               <DialogHeader>
                 <DialogTitle className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  💜 Save Grid Configuration
+                  Save Grid Configuration
                 </DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
@@ -164,7 +181,7 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
                     id="gridName"
                     value={gridName}
                     onChange={(e) => setGridName(e.target.value)}
-                    placeholder="Enter a cute name for your grid... ✨"
+                    placeholder="Enter a name for your grid... "
                     className="mt-1 border-purple-300 focus:border-purple-500"
                   />
                 </div>
@@ -182,8 +199,8 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
                     className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
                   >
                     {saveGridMutation.isPending
-                      ? "Saving... ✨"
-                      : "Save Grid 💜"}
+                      ? "Saving... "
+                      : "Save Grid "}
                   </Button>
                 </div>
               </div>
@@ -194,12 +211,12 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
       <CardContent className="pt-0 flex-1 min-h-0">
         {isLoading ? (
           <div className="text-center py-2 text-purple-500 text-xs">
-            Loading... ✨
+            Loading... 
           </div>
         ) : !savedGrids || savedGrids.length === 0 ? (
           <div className="text-center py-2 text-purple-500">
             <FolderOpenIcon className="w-6 h-6 mx-auto mb-1 text-purple-300" />
-            <p className="text-xs">No saved grids 💜</p>
+            <p className="text-xs">No saved grids </p>
           </div>
         ) : (
           <div className="space-y-1 h-full">
