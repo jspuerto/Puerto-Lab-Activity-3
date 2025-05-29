@@ -1,6 +1,6 @@
 # Pathfinding Visualizer
 
-A beautiful interactive pathfinding visualizer that demonstrates Dijkstra's algorithm with real-time animation on a customizable grid.
+An interactive pathfinding visualizer that demonstrates Dijkstra's algorithm with real-time animation on a customizable grid.
 
 ## Features
 
