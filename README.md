@@ -1,136 +1,87 @@
 # Pathfinding Visualizer
 
-An interactive pathfinding visualizer that demonstrates Dijkstra's algorithm with real-time animation on a customizable grid.
+A modern, interactive pathfinding visualizer built with React, TypeScript, and Tailwind CSS.  
+Visualize algorithms like A* and Dijkstra on a customizable grid, save your favorite grids, and experiment with different scenarios!
 
-## Features
+---
 
-- **Interactive 10x10 Grid**: Click to place start points, end points, and obstacles
-- **Real-time Algorithm Visualization**: Watch Dijkstra's algorithm explore nodes and find the shortest path
-- **Adjustable Animation Speed**: Control the visualization speed (slow, medium, fast)
-- **Grid Save/Load System**: Save your favorite grid configurations and load them later
-- **Beautiful Purple Theme**: Girly purple aesthetic with gradients and animations
-- **Responsive Design**: Compact single-page layout that fits perfectly on screen
-- **Algorithm Statistics**: Track nodes explored, path length, and execution time
+##  Features
 
-## Technologies Used
+- **Interactive Grid:** Place start, end, and wall nodes with simple clicks.
+- **Algorithm Visualization:** Watch pathfinding algorithms step through the grid.
+- **Adjustable Speed:** Control the animation speed.
+- **Grid Saving:** Save and load your favorite grid layouts (local storage, no backend required).
+- **Responsive UI:** Clean, modern design with Tailwind CSS.
 
-- **Frontend**: React 18, TypeScript
-- **Styling**: Tailwind CSS with custom purple theme
-- **UI Components**: Radix UI components for modern interface
-- **Backend**: Express.js with TypeScript
-- **Database**: PostgreSQL for grid persistence
-- **State Management**: React hooks and TanStack Query
-- **Animation**: CSS animations and transitions
+---
 
-## Algorithm Implementation
-
-The core pathfinding logic implements Dijkstra's algorithm with:
-- Priority queue using sorted array
-- Real-time node exploration visualization
-- Animated path reconstruction
-- Performance tracking and statistics
-
-## Getting Started
+##  Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher)
-- PostgreSQL database (for grid saving feature)
+
+- [Node.js](https://nodejs.org/) (v16 or newer)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
 ### Installation
 
-1. Clone the repository
-```bash
-git clone <repository-url>
-cd pathfinding-visualizer
-```
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/pathfinding-visualizer.git
+   cd pathfinding-visualizer
+   ```
 
-2. Install dependencies
-```bash
-npm install
-```
+2. **Install dependencies:**
+   ```sh
+   cd client
+   npm install
+   # or
+   yarn install
+   ```
 
-3. Set up environment variables
-```bash
-# Database connection will be provided automatically in supported environments
-```
+3. **Start the development server:**
+   ```sh
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-4. Start the development server
-```bash
-npm run dev
-```
+4. **Open in your browser:**
+   ```
+   http://localhost:5173
+   ```
 
-5. Open your browser to `http://localhost:5000`
+---
 
-## How to Use
-
-1. **Select Mode**: Choose from Start Point, End Point, Obstacles, or Erase mode
-2. **Build Your Maze**: Click on grid cells to place elements
-3. **Adjust Speed**: Use the slider to control animation speed
-4. **Find Path**: Click the "Find Path" button to run Dijkstra's algorithm
-5. **Save Grid**: Save interesting configurations for later use
-6. **Load Grid**: Quickly load previously saved grids
-
-## Algorithm Details
-
-The visualizer implements Dijkstra's shortest path algorithm:
-
-1. Initialize all nodes with infinite distance except start node (distance 0)
-2. Maintain a priority queue of unvisited nodes
-3. Process nodes in order of shortest distance
-4. Update neighbor distances when shorter paths are found
-5. Mark nodes as explored and visualize the process
-6. Reconstruct and animate the final shortest path
-
-## Color Coding
-
-- **Green**: Start point
-- **Pink**: End point  
-- **Dark Purple**: Obstacles/walls
-- **Light Purple**: Explored nodes
-- **Bright Purple**: Current node being processed
-- **Orange/Pink**: Final shortest path
-
-## Project Structure
+##  Project Structure
 
 ```
-pathfinding-visualizer/
-├── client/
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── lib/           # Core algorithm logic
-│   │   ├── pages/         # Page components
-│   │   └── hooks/         # Custom React hooks
-├── server/
-│   ├── index.ts          # Express server setup
-│   ├── routes.ts         # API endpoints
-│   └── storage.ts        # Data persistence
-├── shared/
-│   └── schema.ts         # Database schema
-└── package.json
+client/
+  src/
+    components/    # React components (Grid, ControlPanel, SavedGrids, etc.)
+    hooks/         # Custom React hooks (e.g., use-toast)
+    lib/           # Pathfinding algorithms and helpers
+    App.tsx        # Main app entry
+    main.tsx       # React root
+    index.css      # Tailwind and global styles
+shared/
+  ...              # Shared types or utilities (if any)
 ```
 
-## API Endpoints
+---
 
-- `GET /api/grids` - Fetch all saved grids
-- `POST /api/grids` - Save a new grid configuration
-- `PUT /api/grids/:id` - Update existing grid
-- `DELETE /api/grids/:id` - Delete a grid
+##  Customization
 
-## Contributing
+- **Grid Size:** Change the grid size in the parent component (e.g., `App.tsx`).
+- **UI Colors/Styles:** Edit Tailwind classes in component files or `index.css`.
+- **Algorithms:** Add or modify algorithms in `lib/pathfinding.ts`.
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+---
 
-## License
+##  Saving Grids
 
-This project is part of a Web Engineering laboratory exercise.
+- Grids are saved in your browser's local storage.
+- No backend or account required.
+- You can save, load, and delete grid layouts from the UI.
 
-## Acknowledgments
+---
 
-- Dijkstra's algorithm implementation based on computer science fundamentals
-- UI components powered by Radix UI
-- Purple theme design for aesthetic appeal
-- Real-time visualization techniques for educational purposes
