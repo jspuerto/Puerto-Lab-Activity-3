@@ -47,7 +47,7 @@ Visualize algorithms like A* and Dijkstra on a customizable grid, save your favo
 
 4. **Open in your browser:**
    ```
-   http://localhost:5173
+   http://localhost:5000
    ```
 
 ---
