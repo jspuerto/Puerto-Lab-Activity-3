@@ -19,7 +19,7 @@ export const users = pgTable("users", {
 export const grids = pgTable("grids", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  gridData: json("grid_data").notNull(), // Stores the grid configuration
+  gridData: json("grid_data").notNull(), 
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

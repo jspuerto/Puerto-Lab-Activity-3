@@ -98,7 +98,6 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
       return;
     }
 
-    // Serialize the current grid state
     const gridData = {
       nodes: currentGrid.nodes.map((row) =>
         row.map((node) => ({

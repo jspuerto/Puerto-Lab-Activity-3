@@ -3,34 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --background: 320 25% 98%; /* Soft lavender white */
-  --foreground: 280 15% 15%; /* Deep purple-gray */
-  --muted: 315 20% 92%; /* Light purple-pink */
-  --muted-foreground: 280 10% 45%; /* Medium purple-gray */
+  --background: 320 25% 98%; 
+  --foreground: 280 15% 15%; 
+  --muted: 315 20% 92%; 
+  --muted-foreground: 280 10% 45%; 
   --popover: 320 25% 98%;
   --popover-foreground: 280 15% 15%;
-  --card: 320 30% 96%; /* Very light purple */
+  --card: 320 30% 96%; 
   --card-foreground: 280 15% 15%;
-  --border: 315 15% 85%; /* Soft purple border */
+  --border: 315 15% 85%; 
   --input: 315 15% 85%;
-  --primary: 280 100% 70%; /* Beautiful bright purple */
+  --primary: 280 100% 70%; 
   --primary-foreground: 320 25% 98%;
-  --secondary: 315 35% 88%; /* Soft purple-pink */
+  --secondary: 315 35% 88%; 
   --secondary-foreground: 280 20% 20%;
-  --accent: 300 45% 85%; /* Light purple accent */
+  --accent: 300 45% 85%; 
   --accent-foreground: 280 20% 20%;
-  --destructive: 350 85% 65%; /* Soft pink-red */
+  --destructive: 350 85% 65%; 
   --destructive-foreground: 320 25% 98%;
   --ring: 280 100% 70%;
-  --radius: 0.75rem; /* More rounded for softer look */
+  --radius: 0.75rem; 
   
-  /* Pathfinding specific colors - girly purple theme */
-  --start: 140 60% 65%; /* Soft mint green */
-  --end: 330 85% 70%; /* Pretty pink */
-  --obstacle: 280 30% 25%; /* Deep purple */
-  --explored: 270 80% 80%; /* Light lavender */
-  --path: 290 90% 75%; /* Bright purple-pink */
-  --current: 260 100% 85%; /* Glowing light purple */
+  --start: 140 60% 65%; 
+  --end: 330 85% 70%; 
+  --obstacle: 280 30% 25%; 
+  --explored: 270 80% 80%;
+  --path: 290 90% 75%; 
+  --current: 260 100% 85%;
 }
 
 .dark {

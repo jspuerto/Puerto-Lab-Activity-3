@@ -74,7 +74,6 @@ export class PathfindingGrid {
     const node = this.getNode(row, col);
     if (!node) return;
 
-    // Handle start/end node placement
     if (type === 'start') {
       if (this.startNode) {
         this.startNode.type = 'empty';
@@ -124,7 +123,6 @@ export class PathfindingGrid {
   loadFromData(gridData: any) {
     this.reset();
     
-    // Load nodes
     if (gridData.nodes) {
       for (let row = 0; row < this.rows && row < gridData.nodes.length; row++) {
         for (let col = 0; col < this.cols && col < gridData.nodes[row].length; col++) {
@@ -136,7 +134,6 @@ export class PathfindingGrid {
       }
     }
     
-    // Set start and end nodes based on saved positions
     if (gridData.startNode) {
       const { row, col } = gridData.startNode;
       if (row >= 0 && row < this.rows && col >= 0 && col < this.cols) {
@@ -176,7 +173,7 @@ export class DijkstraAlgorithm {
     this.grid = grid;
     this.onNodeUpdate = onNodeUpdate;
     this.onStatsUpdate = onStatsUpdate;
-    this.speed = 2; // 1 = slow, 2 = medium, 3 = fast
+    this.speed = 2;  
     this.isRunning = false;
     this.stats = {
       exploredCount: 0,
@@ -203,7 +200,6 @@ export class DijkstraAlgorithm {
 
     const startTime = Date.now();
     
-    // Initialize all nodes
     const unvisited: PathfindingNode[] = [];
     for (let row = 0; row < this.grid.rows; row++) {
       for (let col = 0; col < this.grid.cols; col++) {
@@ -220,22 +216,18 @@ export class DijkstraAlgorithm {
     while (unvisited.length > 0) {
       if (!this.isRunning) break;
 
-      // Sort unvisited nodes by distance
       unvisited.sort((a, b) => a.distance - b.distance);
       const currentNode = unvisited.shift()!;
 
-      // If we hit an obstacle or infinite distance, continue
       if (currentNode.type === 'obstacle' || currentNode.distance === Infinity) {
         continue;
       }
 
-      // Mark as current and update display
       if (currentNode.type !== 'start' && currentNode.type !== 'end') {
         currentNode.type = 'current';
         this.onNodeUpdate(currentNode);
       }
 
-      // If we reached the end, reconstruct path
       if (currentNode === this.grid.endNode) {
         await this.reconstructPath();
         this.stats.timeElapsed = Date.now() - startTime;
@@ -245,7 +237,6 @@ export class DijkstraAlgorithm {
         return true;
       }
 
-      // Explore neighbors
       const neighbors = this.grid.getNeighbors(currentNode);
       for (const neighbor of neighbors) {
         if (neighbor.isVisited) continue;
@@ -257,7 +248,6 @@ export class DijkstraAlgorithm {
         }
       }
 
-      // Mark as explored
       currentNode.isVisited = true;
       if (currentNode.type === 'current') {
         currentNode.type = 'explored';
@@ -265,11 +255,9 @@ export class DijkstraAlgorithm {
         this.onNodeUpdate(currentNode);
       }
 
-      // Update stats
       this.stats.timeElapsed = Date.now() - startTime;
       this.onStatsUpdate(this.stats);
 
-      // Wait based on speed setting
       await this.delay(this.getDelayTime());
     }
 
@@ -291,7 +279,6 @@ export class DijkstraAlgorithm {
 
     this.stats.pathLength = Math.max(0, path.length - 1);
 
-    // Animate path reconstruction
     for (let i = 1; i < path.length - 1; i++) {
       path[i].type = 'path';
       this.onNodeUpdate(path[i]);

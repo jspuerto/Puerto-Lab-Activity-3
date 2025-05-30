@@ -5,7 +5,6 @@ export interface IStorage {
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   
-  // Grid storage methods
   getAllGrids(): Promise<Grid[]>;
   getGrid(id: number): Promise<Grid | undefined>;
   createGrid(grid: InsertGrid): Promise<Grid>;
