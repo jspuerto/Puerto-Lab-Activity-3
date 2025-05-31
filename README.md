@@ -67,15 +67,6 @@ shared/
   ...              # Shared types or utilities (if any)
 ```
 
----
-
-##  Customization
-
-- **Grid Size:** Change the grid size in the parent component (e.g., `App.tsx`).
-- **UI Colors/Styles:** Edit Tailwind classes in component files or `index.css`.
-- **Algorithms:** Add or modify algorithms in `lib/pathfinding.ts`.
-
----
 
 ##  Saving Grids
 
