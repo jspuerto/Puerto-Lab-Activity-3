@@ -1,10 +1,15 @@
-import { users, grids, type User, type InsertUser, type Grid, type InsertGrid } from "@shared/schema";
-
+import {
+  type User,
+  type InsertUser,
+  type Grid,
+  type InsertGrid,
+} 
+from "@shared/schema";
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  
+
   getAllGrids(): Promise<Grid[]>;
   getGrid(id: number): Promise<Grid | undefined>;
   createGrid(grid: InsertGrid): Promise<Grid>;
@@ -31,7 +36,7 @@ export class MemStorage implements IStorage {
 
   async getUserByUsername(username: string): Promise<User | undefined> {
     return Array.from(this.users.values()).find(
-      (user) => user.username === username,
+      (user) => user.username === username
     );
   }
 
@@ -43,8 +48,9 @@ export class MemStorage implements IStorage {
   }
 
   async getAllGrids(): Promise<Grid[]> {
-    return Array.from(this.grids.values()).sort((a, b) => 
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    return Array.from(this.grids.values()).sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
   }
 
@@ -55,26 +61,29 @@ export class MemStorage implements IStorage {
   async createGrid(insertGrid: InsertGrid): Promise<Grid> {
     const id = this.currentGridId++;
     const now = new Date();
-    const grid: Grid = { 
-      ...insertGrid, 
-      id, 
+    const grid: Grid = {
+      ...insertGrid,
+      id,
       createdAt: now,
-      updatedAt: now
+      updatedAt: now,
     };
     this.grids.set(id, grid);
     return grid;
   }
 
-  async updateGrid(id: number, updateData: Partial<InsertGrid>): Promise<Grid | undefined> {
+  async updateGrid(
+    id: number,
+    updateData: Partial<InsertGrid>
+  ): Promise<Grid | undefined> {
     const existingGrid = this.grids.get(id);
     if (!existingGrid) return undefined;
 
     const updatedGrid: Grid = {
       ...existingGrid,
       ...updateData,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
-    
+
     this.grids.set(id, updatedGrid);
     return updatedGrid;
   }
