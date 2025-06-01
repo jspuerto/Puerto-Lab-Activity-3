@@ -1,7 +1,7 @@
 # Pathfinding Visualizer
 
-A modern, interactive pathfinding visualizer built with React, TypeScript, and Tailwind CSS.  
-Visualize algorithms like A* and Dijkstra on a customizable grid, save your favorite grids, and experiment with different scenarios!
+A modern, interactive pathfinding visualizer built with TypeScript, and Tailwind CSS.  
+Visualize algorithms like A* and Dijkstra on a grid, save your favorite grids, and experiment with different scenarios!
 
 ---
 
