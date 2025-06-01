@@ -17,7 +17,7 @@ import {
   TrashIcon,
   CalendarIcon,
 } from "lucide-react";
-import { PathfindingGrid, PathfindingNode } from "@/lib/pathfinding";
+import { PathfindingGrid } from "@/lib/pathfinding";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import type { Grid } from "@shared/schema";
@@ -152,7 +152,7 @@ export function SavedGrids({ currentGrid, onLoadGrid }: SavedGridsProps) {
           <div className="flex items-center text-sm">
             <FolderOpenIcon className="w-4 h-4 text-purple-600 mr-2" />
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              💾 Saved
+               Saved
             </span>
           </div>
           <Dialog open={saveDialogOpen} onOpenChange={setSaveDialogOpen}>

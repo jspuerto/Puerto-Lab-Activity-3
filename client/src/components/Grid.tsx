@@ -56,7 +56,7 @@ export function Grid({ nodes, onCellClick, isRunning }: GridProps) {
               d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
             />
           </svg>
-          ✨ Interactive Grid ✨
+           Interactive Grid 
         </h2>
       </div>
       <div className="flex justify-center mb-3 ">
@@ -80,10 +80,10 @@ export function Grid({ nodes, onCellClick, isRunning }: GridProps) {
       <div className="bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-300 rounded-xl p-3 shadow-md">
         <div className="text-center">
           <h4 className="text-sm font-semibold text-purple-800 mb-2">
-            💜 Quick Guide
+             Quick Guide
           </h4>
           <p className="text-xs text-purple-700">
-            Select mode → Click cells → Adjust speed → Find Path ✨
+            Select mode → Click cells → Adjust speed → Find Path 
           </p>
         </div>
       </div>
